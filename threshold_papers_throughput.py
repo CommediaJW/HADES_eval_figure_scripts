@@ -46,7 +46,7 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
     plt.tick_params(
         axis="both",
         which="major",
-        labelsize=24,
+        labelsize=12,
         direction="in",
         bottom=True,
         top=True,
@@ -81,7 +81,7 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
             color='k',
             marker=marker_list[it - 1],
             markerfacecolor=color_list[it - 1],
-            markersize=20,
+            markersize=12,
             markeredgecolor='k',
             markeredgewidth=1.5,
             clip_on=False,

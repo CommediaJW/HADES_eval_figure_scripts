@@ -6,7 +6,8 @@ import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-hatch_list = ["//", "\\\\", None, None]
+# hatch_list = ["//", "\\\\", None, None]
+hatch_list = [None, None, None, None]
 color_list = ["#819fa6", "#c18076", "#3d4a55", "#d1b5ab"]
 
 
@@ -67,7 +68,10 @@ def plot(names, object_labels, group_labels, data, lengend, output_path,
         else:
             ax = plt.subplot(1, 6, 3 + it)
 
-        plt.title(name + "-" + model_name, fontsize=font_size, y=-0.5)
+        plt.title(name + "-" + model_name,
+                  fontsize=font_size,
+                  y=-0.5,
+                  fontweight="bold")
         ax.tick_params(
             axis="both",
             which="major",
@@ -139,19 +143,19 @@ def plot(names, object_labels, group_labels, data, lengend, output_path,
 
         if name == "RD" or name == "PD":
             ax.legend(
-                fontsize=font_size,
+                fontsize=font_size - 3,
                 edgecolor="k",
                 ncol=1,
                 loc="upper center",
-                bbox_to_anchor=(0.22, 1),
+                bbox_to_anchor=(0.21, 1.01),
             )
         else:
             ax.legend(
-                fontsize=font_size,
+                fontsize=font_size - 3,
                 edgecolor="k",
                 ncol=1,
                 loc="upper center",
-                bbox_to_anchor=(0.5, 1),
+                bbox_to_anchor=(0.5, 1.01),
             )
     plt.rcParams['font.size'] = font_size
     print(f"[Note]Save to {output_path}")
@@ -164,7 +168,7 @@ def draw_figure(input_path, output_path, max_ylim, ystep):
 
     output_path = "figures/" + "speedup_graphsage_normalize.pdf"
     plot(names, labels, header, all_data, None, output_path, max_ylim, ystep,
-         "GraphSAGE")
+         "SAGE")
 
 
 def draw_figure2(input_path, output_path, max_ylim, ystep):

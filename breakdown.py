@@ -6,7 +6,8 @@ import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-hatch_list = [None, "//", "\\\\", "--"]
+# hatch_list = [None, "//", "\\\\", "--"]
+hatch_list = [None, None, None, None]
 color_list = ["#819fa6", "#c18076", "#3d4a55", "#d1b5ab"]
 
 

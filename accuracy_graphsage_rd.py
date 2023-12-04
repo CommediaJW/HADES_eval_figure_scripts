@@ -81,7 +81,7 @@ def plot(names, data, output_path, max_ylim, ystep):
         edgecolor="k",
         ncol=1,
         loc="upper center",
-        bbox_to_anchor=(0.73, 0.53),
+        bbox_to_anchor=(0.69, 0.53),
     )
 
     print(f"[Note]Save to {output_path}")
@@ -97,4 +97,4 @@ def draw_figure(input_path, output_path, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/accuracy_graphsage_reddit.csv", "figures", 1, 0.25)
+    draw_figure("data/accuracy_graphsage_reddit.csv", "figures", 1, 0.2)
