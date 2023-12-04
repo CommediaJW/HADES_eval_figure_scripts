@@ -37,7 +37,7 @@ def read_data(path):
 
 
 def plot(names, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(9, 5))
+    plt.figure(figsize=(4.5, 2.8))
     plt.clf()
     # fix parameter
     font_size = 20
@@ -46,7 +46,7 @@ def plot(names, data, output_path, max_ylim, ystep):
     plt.tick_params(
         axis="both",
         which="major",
-        labelsize=24,
+        labelsize=font_size,
         direction="in",
         bottom=True,
         top=True,
@@ -56,11 +56,11 @@ def plot(names, data, output_path, max_ylim, ystep):
     max_xlim = len(data[names[0]]) + 1
     plt.xlim(0, max_xlim)
     x = np.arange(1, max_xlim)
-    xticks = np.arange(0, max_xlim + 1, 2)
+    xticks = np.arange(0, max_xlim + 1, 4)
     plt.ylim(0, max_ylim)
     yticks = np.arange(ystep, max_ylim + ystep, ystep)
-    plt.xlabel("Epoch", fontsize=font_size, fontweight="bold")
-    plt.ylabel("Test Accuracy", fontsize=font_size, fontweight="bold")
+    plt.xlabel("Epoch", fontsize=font_size)
+    plt.ylabel("Test Accuracy", fontsize=font_size)
     plt.xticks(xticks)
     plt.yticks(yticks)
     for it, name in enumerate(names):
@@ -72,7 +72,7 @@ def plot(names, data, output_path, max_ylim, ystep):
                  color='k',
                  marker=marker_list[it],
                  markerfacecolor=color_list[it],
-                 markersize=16,
+                 markersize=8,
                  markeredgecolor='k',
                  markeredgewidth=1.5)
 
@@ -81,7 +81,7 @@ def plot(names, data, output_path, max_ylim, ystep):
         edgecolor="k",
         ncol=1,
         loc="upper center",
-        bbox_to_anchor=(0.15, 0.99),
+        bbox_to_anchor=(0.73, 0.53),
     )
 
     print(f"[Note]Save to {output_path}")

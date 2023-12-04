@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-hatch_list = [None, "//", "\\\\",  "--"]
+hatch_list = [None, "//", "\\\\", "--"]
 color_list = ["#819fa6", "#c18076", "#3d4a55", "#d1b5ab"]
 
 
@@ -42,14 +42,14 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
     # fix parameter
     font_size = 20
     tick_space_len = 1
-    bar_width = 0.24
+    bar_width = 0.2
     plt.rcParams['font.size'] = font_size
 
     # plt.title("Breakdown-GraphSAGE", fontsize=font_size + 1, y=-0.3)
     plt.tick_params(
         axis="both",
         which="major",
-        labelsize=24,
+        labelsize=font_size,
         direction="in",
         bottom=True,
         top=True,
@@ -58,18 +58,17 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
     )
     xlim = len(headers) * tick_space_len
     xlabels = [""] + headers
-    xticks = np.arange(0, xlim + tick_space_len, tick_space_len)
+    xticks = [0, 0.867, 2.133, 3]
 
     plt.xlim(0, xlim)
     plt.xticks(xticks, xlabels)
     # plt.xlabel("Dataset", fontsize=font_size, fontweight="bold")
-    
+
     for it, label in enumerate(labels):
         if it == 0:
             plt.ylabel(
                 "Normalized Speedup",
                 fontsize=font_size,
-                fontweight="bold",
             )
         plt.ylim(0, max_ylim)
         plt.yticks(np.arange(0, max_ylim, ystep))
@@ -78,10 +77,7 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
         #                     scilimits=(3, 3),
         #                     useMathText=True)
 
-        plot_x = np.arange(1 * tick_space_len,
-                           len(headers) * tick_space_len,
-                           tick_space_len,
-                           dtype=float)
+        plot_x = np.array([0.88, 2.12])
         cluster_len = bar_width * len(labels)
         plot_x -= cluster_len / 2  # start offset of bar cluster
         plot_x += bar_width * (it + 0.5)  # start offset of this bar
@@ -101,16 +97,18 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
             label=label,
             zorder=10,
         )
-        plt.bar_label(container, plot_label, fontsize=font_size - 2,
-                     zorder=10)
+        plt.bar_label(container, plot_label, fontsize=font_size - 2, zorder=10)
 
-    plt.legend(
-        fontsize=font_size,
-        edgecolor="k",
-        ncol=2,
-        loc="upper center",
-        bbox_to_anchor=(0.5, 1),
-    )
+    handles, _ = plt.gca().get_legend_handles_labels()
+    reorder_handles = [handles[0], handles[2], handles[1], handles[3]]
+    reorder_labels = [labels[0], labels[2], labels[1], labels[3]]
+    plt.legend(reorder_handles,
+               reorder_labels,
+               fontsize=font_size,
+               edgecolor="k",
+               ncol=2,
+               loc="upper center",
+               bbox_to_anchor=(0.5, 1))
     print(f"[Note]Save to {output_path}")
     plt.savefig(output_path, bbox_inches="tight")
     plt.close("all")

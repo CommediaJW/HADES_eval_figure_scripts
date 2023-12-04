@@ -67,11 +67,11 @@ def plot(names, object_labels, group_labels, data, lengend, output_path,
         else:
             ax = plt.subplot(1, 6, 3 + it)
 
-        plt.title(name + "-" + model_name, fontsize=font_size + 1, y=-0.5)
+        plt.title(name + "-" + model_name, fontsize=font_size, y=-0.5)
         ax.tick_params(
             axis="both",
             which="major",
-            labelsize=24,
+            labelsize=font_size,
             direction="in",
             bottom=True,
             top=True,
@@ -90,13 +90,12 @@ def plot(names, object_labels, group_labels, data, lengend, output_path,
         xticks = np.arange(0, xlim, tick_space_len)
         ax.set_xlim(0, xlim)
         ax.set_xticks(xticks, xlabels)
-        ax.set_xlabel("#GPUs", fontsize=font_size, fontweight="bold")
+        ax.set_xlabel("#GPUs", fontsize=font_size)
 
         if it == 0:
             ax.set_ylabel(
                 "Speedup",
                 fontsize=font_size,
-                fontweight="bold",
             )
         ax.set_ylim(0, max_ylim)
         ax.set_yticks(np.arange(0, max_ylim, ystep))
@@ -133,8 +132,10 @@ def plot(names, object_labels, group_labels, data, lengend, output_path,
                 label=object_labels[i],
                 zorder=10,
             )
-            ax.bar_label(container, plot_label, fontsize=font_size - 2,
-                     zorder=10)
+            ax.bar_label(container,
+                         plot_label,
+                         fontsize=font_size - 2,
+                         zorder=10)
 
         if name == "RD" or name == "PD":
             ax.legend(
@@ -162,13 +163,16 @@ def draw_figure(input_path, output_path, max_ylim, ystep):
     names, header, labels, all_data = read_data(input_path)
 
     output_path = "figures/" + "speedup_graphsage_normalize.pdf"
-    plot(names, labels, header, all_data, None, output_path, max_ylim, ystep, "GraphSAGE")
-    
+    plot(names, labels, header, all_data, None, output_path, max_ylim, ystep,
+         "GraphSAGE")
+
+
 def draw_figure2(input_path, output_path, max_ylim, ystep):
     names, header, labels, all_data = read_data(input_path)
 
     output_path = "figures/" + "speedup_gat_normalize.pdf"
-    plot(names, labels, header, all_data, None, output_path, max_ylim, ystep, "GAT")
+    plot(names, labels, header, all_data, None, output_path, max_ylim, ystep,
+         "GAT")
 
 
 if __name__ == "__main__":

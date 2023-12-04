@@ -42,7 +42,7 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
     # fix parameter
     font_size = 20
     plt.rcParams['font.size'] = font_size
-    plt.title("PD-GraphSAGE", fontsize=font_size + 1, y=-0.35)
+    # plt.title("PD-GraphSAGE", fontsize=font_size + 1, y=-0.35)
     plt.tick_params(
         axis="both",
         which="major",
@@ -59,8 +59,8 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
     xlabels = data[names[0]]
     plt.ylim(min_ylim, max_ylim)
     yticks = np.arange(min_ylim, max_ylim + ystep, ystep)
-    plt.xlabel(names[0], fontsize=font_size, fontweight="bold", labelpad=10)
-    plt.ylabel(names[1], fontsize=font_size, fontweight="bold", labelpad=10)
+    plt.xlabel(names[0], fontsize=font_size, labelpad=10)
+    plt.ylabel(names[1], fontsize=font_size, labelpad=10)
     plt.xticks(xticks, xlabels)
     plt.tick_params(axis='x', pad=15)
     plt.yticks(yticks)
