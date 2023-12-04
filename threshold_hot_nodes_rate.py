@@ -46,7 +46,7 @@ def read_data(path):
 
 
 def plot(names, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(9, 5))
+    plt.figure(figsize=(9, 3.5))
     plt.clf()
     # fix parameter
     font_size = 20
@@ -113,4 +113,4 @@ def draw_figure(input_path, output_path, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/threshold_hot_nodes_rate.csv", "figures", 1.0, 0.2)
+    draw_figure("data/threshold_hot_nodes_rate.csv", "figures", 1.0, 0.25)
