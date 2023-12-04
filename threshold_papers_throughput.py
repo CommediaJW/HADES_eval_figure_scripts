@@ -42,11 +42,11 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
     # fix parameter
     font_size = 20
     plt.rcParams['font.size'] = font_size
-    # plt.title("PP-GraphSAGE", fontsize=font_size + 1, y=-0.35)
+    # plt.title("PD-GraphSAGE", fontsize=font_size + 1, y=-0.35)
     plt.tick_params(
         axis="both",
         which="major",
-        labelsize=12,
+        labelsize=24,
         direction="in",
         bottom=True,
         top=True,

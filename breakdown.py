@@ -37,7 +37,7 @@ def read_data(path):
 
 
 def plot(headers, labels, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(9, 5))
+    plt.figure(figsize=(9, 3.5))
     plt.subplots_adjust(wspace=0.5)
     plt.clf()
     # fix parameter
@@ -100,16 +100,14 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
         )
         plt.bar_label(container, plot_label, fontsize=font_size - 2, zorder=10)
 
-    handles, _ = plt.gca().get_legend_handles_labels()
-    reorder_handles = [handles[0], handles[2], handles[1], handles[3]]
-    reorder_labels = [labels[0], labels[2], labels[1], labels[3]]
-    plt.legend(reorder_handles,
-               reorder_labels,
-               fontsize=font_size,
+    # handles, _ = plt.gca().get_legend_handles_labels()
+    # reorder_handles = [handles[0], handles[2], handles[1], handles[3]]
+    # reorder_labels = [labels[0], labels[2], labels[1], labels[3]]
+    plt.legend(fontsize=font_size - 3,
                edgecolor="k",
-               ncol=2,
+               ncol=4,
                loc="upper center",
-               bbox_to_anchor=(0.5, 1))
+               bbox_to_anchor=(0.5, 1.22))
     print(f"[Note]Save to {output_path}")
     plt.savefig(output_path, bbox_inches="tight")
     plt.close("all")
@@ -123,4 +121,4 @@ def draw_figure(input_path, output_path, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/breakdown.csv", "figures", 5, 1)
+    draw_figure("data/breakdown.csv", "figures", 3.5, 1)

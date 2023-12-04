@@ -6,13 +6,18 @@ import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-marker_list = ["o", "^", "s", "v", "*"]
-color_list = ["#819fa6", "#3d4a55", "#c18076", "#d1b5ab", "#E7D3C7"]
+marker_list = ["o", "^", "o", "^"]
+color_list = ["#819fa6", "#c18076", "#3d4a55", "#d1b5ab"]
 
 
 def isfloat(val):
     return all([[any([i.isnumeric(), i in [".", "e"]]) for i in val],
                 len(val.split(".")) == 2])
+
+
+def get_labels(data):
+    for key, value in data.items():
+        return [label[0] for label in value]
 
 
 def read_data(path):
@@ -37,49 +42,55 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
     # fix parameter
     font_size = 20
     plt.rcParams['font.size'] = font_size
-    # plt.title("PD-GraphSAGE", fontsize=font_size + 1, y=-0.3)
+    # plt.title("PD-GraphSAGE", fontsize=font_size + 1, y=-0.35)
     plt.tick_params(
         axis="both",
         which="major",
-        labelsize=font_size,
+        labelsize=24,
         direction="in",
         bottom=True,
         top=True,
         left=True,
         right=True,
     )
-    max_xlim = len(data[names[0]]) + 1
-    plt.xlim(0, max_xlim)
-    x = np.arange(1, max_xlim)
-    xticks = np.arange(0, max_xlim + 1, 2)
+    max_xlim = len(data[names[0]])
+    plt.xlim(0, max_xlim - 1)
+    xticks = np.arange(0, max_xlim)
+    xlabels = data[names[0]]
     plt.ylim(min_ylim, max_ylim)
-    yticks = np.arange(ystep, max_ylim + ystep, ystep)
-    plt.xlabel("Epoch", fontsize=font_size)
-    plt.ylabel("Test Accuracy", fontsize=font_size)
-    plt.xticks(xticks)
+    yticks = np.arange(min_ylim, max_ylim, ystep)
+    plt.xlabel(names[0], fontsize=font_size, labelpad=10)
+    plt.ylabel("Accuracy", fontsize=font_size, labelpad=10)
+    plt.xticks(xticks, xlabels)
+    plt.tick_params(axis='x', pad=15)
     plt.yticks(yticks)
+    plt.tick_params(axis='y', pad=10)
     for it, name in enumerate(names):
-        print(data[name])
+        if it == 0:
+            continue
         plt.plot(
-            x,
+            xticks,
             data[name],
             label=name,
             linestyle='-',
             color='k',
-            marker=marker_list[it],
-            markerfacecolor=color_list[it],
+            marker=marker_list[it - 1],
+            markerfacecolor=color_list[it - 1],
             markersize=12,
             markeredgecolor='k',
+            markeredgewidth=1.5,
+            clip_on=False,
+            zorder=10,
         )
-        #  markeredgewidth=1.5)
 
-    plt.legend(
-        fontsize=font_size,
-        edgecolor="k",
-        ncol=2,
-        loc="upper center",
-        bbox_to_anchor=(0.64, 0.43),
-    )
+    if len(names) > 2:
+        plt.legend(
+            fontsize=font_size,
+            edgecolor="k",
+            ncol=2,
+            loc="upper center",
+            bbox_to_anchor=(0.28, 0.99),
+        )
 
     print(f"[Note]Save to {output_path}")
     plt.savefig(output_path, bbox_inches="tight")
@@ -94,5 +105,5 @@ def draw_figure(input_path, output_path, min_ylim, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/threshold_products_accuracy.csv", "figures", 0.2, 0.8,
-                0.2)
+    draw_figure("data/threshold_products_accuracy.csv", "figures", 0.7, 1,
+                0.05)
