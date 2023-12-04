@@ -37,7 +37,7 @@ def read_data(path):
 
 
 def plot(names, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(4.5, 3.8))
+    plt.figure(figsize=(4.2, 3.5))
     plt.clf()
     # fix parameter
     font_size = 20
@@ -90,7 +90,7 @@ def plot(names, data, output_path, max_ylim, ystep):
 
 
 def plot2(names, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(4.5, 3.8))
+    plt.figure(figsize=(4.2, 3.5))
     plt.clf()
     # fix parameter
     font_size = 20
