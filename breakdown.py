@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-hatch_list = ["//", "\\\\", "xx", "--"]
+hatch_list = [None, "//", "\\\\",  "--"]
 color_list = ["#819fa6", "#c18076", "#3d4a55", "#d1b5ab"]
 
 
@@ -42,10 +42,10 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
     # fix parameter
     font_size = 20
     tick_space_len = 1
-    bar_width = 0.15
+    bar_width = 0.24
     plt.rcParams['font.size'] = font_size
 
-    plt.title("Breakdown-GraphSAGE", fontsize=font_size + 1, y=-0.3)
+    # plt.title("Breakdown-GraphSAGE", fontsize=font_size + 1, y=-0.3)
     plt.tick_params(
         axis="both",
         which="major",
@@ -62,21 +62,21 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
 
     plt.xlim(0, xlim)
     plt.xticks(xticks, xlabels)
-    plt.xlabel("Dataset", fontsize=font_size, fontweight="bold")
-
+    # plt.xlabel("Dataset", fontsize=font_size, fontweight="bold")
+    
     for it, label in enumerate(labels):
         if it == 0:
             plt.ylabel(
-                "seeds/sec",
+                "Normalized Speedup",
                 fontsize=font_size,
                 fontweight="bold",
             )
         plt.ylim(0, max_ylim)
         plt.yticks(np.arange(0, max_ylim, ystep))
-        plt.ticklabel_format(style='scientific',
-                             axis='y',
-                             scilimits=(3, 3),
-                             useMathText=True)
+        #plt.ticklabel_format(style='scientific',
+        #                     axis='y',
+        #                     scilimits=(3, 3),
+        #                     useMathText=True)
 
         plot_x = np.arange(1 * tick_space_len,
                            len(headers) * tick_space_len,
@@ -86,12 +86,12 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
         plot_x -= cluster_len / 2  # start offset of bar cluster
         plot_x += bar_width * (it + 0.5)  # start offset of this bar
         plot_y = []
+        plot_label = []
         for e in data[label]:
-            if e <= 0.01:
-                plot_y.append(0.1)
-            else:
+            if e > 0.01:
                 plot_y.append(e)
-        plt.bar(
+                plot_label.append("%.1f" % e)
+        container = plt.bar(
             plot_x,
             plot_y,
             width=bar_width,
@@ -101,6 +101,8 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
             label=label,
             zorder=10,
         )
+        plt.bar_label(container, plot_label, fontsize=font_size - 2,
+                     zorder=10)
 
     plt.legend(
         fontsize=font_size,
@@ -122,4 +124,4 @@ def draw_figure(input_path, output_path, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/breakdown.csv", "figures", 60000, 10000)
+    draw_figure("data/breakdown.csv", "figures", 5, 1)

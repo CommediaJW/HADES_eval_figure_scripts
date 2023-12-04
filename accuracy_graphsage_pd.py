@@ -42,7 +42,7 @@ def plot(names, data, output_path, max_ylim, ystep):
     # fix parameter
     font_size = 20
     plt.rcParams['font.size'] = font_size
-    plt.title("PP-GraphSAGE", fontsize=font_size + 1, y=-0.35)
+    # plt.title("PD-GraphSAGE", fontsize=font_size + 1, y=-0.3)
     plt.tick_params(
         axis="both",
         which="major",
@@ -53,49 +53,36 @@ def plot(names, data, output_path, max_ylim, ystep):
         left=True,
         right=True,
     )
-    max_xlim = len(data[names[0]])
-    plt.xlim(0, max_xlim - 1)
-    xticks = np.arange(0, max_xlim)
-    xlabels = data[names[0]]
+    max_xlim = len(data[names[0]]) + 1
+    plt.xlim(0, max_xlim)
+    x = np.arange(1, max_xlim)
+    xticks = np.arange(0, max_xlim + 1, 2)
     plt.ylim(0, max_ylim)
     yticks = np.arange(ystep, max_ylim + ystep, ystep)
-    plt.xlabel(names[0], fontsize=font_size, fontweight="bold", labelpad=10)
-    plt.ylabel(names[1], fontsize=font_size, fontweight="bold", labelpad=10)
-    plt.xticks(xticks, xlabels)
-    plt.tick_params(axis='x', pad=15)
+    plt.xlabel("Epoch", fontsize=font_size, fontweight="bold")
+    plt.ylabel("Test Accuracy", fontsize=font_size, fontweight="bold")
+    plt.xticks(xticks)
     plt.yticks(yticks)
-    plt.tick_params(axis='y', pad=10)
-    plt.ticklabel_format(style='scientific',
-                         axis='y',
-                         scilimits=(6, 6),
-                         useMathText=True)
     for it, name in enumerate(names):
-        if it == 0:
-            continue
-        plt.plot(
-            xticks,
-            data[name],
-            label=name,
-            linestyle='-',
-            linewidth=2,
-            color='k',
-            marker=marker_list[it - 1],
-            markerfacecolor=color_list[it - 1],
-            markersize=20,
-            markeredgecolor='k',
-            markeredgewidth=1.5,
-            clip_on=False,
-            zorder=10,
-        )
+        print(data[name])
+        plt.plot(x,
+                 data[name],
+                 label=name,
+                 linestyle='-',
+                 color='k',
+                 marker=marker_list[it],
+                 markerfacecolor=color_list[it],
+                 markersize=16,
+                 markeredgecolor='k',
+                 markeredgewidth=1.5)
 
-    if len(names) > 2:
-        plt.legend(
-            fontsize=font_size,
-            edgecolor="k",
-            ncol=1,
-            loc="upper center",
-            bbox_to_anchor=(0.17, 0.98),
-        )
+    plt.legend(
+        fontsize=font_size,
+        edgecolor="k",
+        ncol=1,
+        loc="upper center",
+        bbox_to_anchor=(0.15, 0.99),
+    )
 
     print(f"[Note]Save to {output_path}")
     plt.savefig(output_path, bbox_inches="tight")
@@ -105,10 +92,9 @@ def plot(names, data, output_path, max_ylim, ystep):
 def draw_figure(input_path, output_path, max_ylim, ystep):
     header, all_data = read_data(input_path)
 
-    output_path = "figures/" + "threshold_papers_hot_nodes_num.pdf"
+    output_path = "figures/" + "accuracy_graphsage_products.pdf"
     plot(header, all_data, output_path, max_ylim, ystep)
 
 
 if __name__ == "__main__":
-    draw_figure("data/threshold_papers_hot_nodes_num.csv", "figures",
-                120000000, 20000000)
+    draw_figure("data/accuracy_graphsage_products.csv", "figures", 1, 0.25)
