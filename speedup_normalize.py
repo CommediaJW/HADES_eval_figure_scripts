@@ -52,7 +52,7 @@ def read_data(path):
 
 
 def plot(names, object_labels, group_labels, data, lengend, output_path,
-         max_ylim, ystep):
+         max_ylim, ystep, model_name):
     plt.figure(figsize=(20, 3))
     plt.subplots_adjust(wspace=0.5)
     plt.clf()
@@ -67,7 +67,7 @@ def plot(names, object_labels, group_labels, data, lengend, output_path,
         else:
             ax = plt.subplot(1, 6, 3 + it)
 
-        plt.title(name + "-GraphSAGE", fontsize=font_size + 1, y=-0.5)
+        plt.title(name + "-" + model_name, fontsize=font_size + 1, y=-0.5)
         ax.tick_params(
             axis="both",
             which="major",
@@ -162,13 +162,13 @@ def draw_figure(input_path, output_path, max_ylim, ystep):
     names, header, labels, all_data = read_data(input_path)
 
     output_path = "figures/" + "speedup_graphsage_normalize.pdf"
-    plot(names, labels, header, all_data, None, output_path, max_ylim, ystep)
+    plot(names, labels, header, all_data, None, output_path, max_ylim, ystep, "GraphSAGE")
     
 def draw_figure2(input_path, output_path, max_ylim, ystep):
     names, header, labels, all_data = read_data(input_path)
 
     output_path = "figures/" + "speedup_gat_normalize.pdf"
-    plot(names, labels, header, all_data, None, output_path, max_ylim, ystep)
+    plot(names, labels, header, all_data, None, output_path, max_ylim, ystep, "GAT")
 
 
 if __name__ == "__main__":
