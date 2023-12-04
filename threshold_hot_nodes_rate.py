@@ -62,32 +62,24 @@ def plot(names, data, output_path, max_ylim, ystep):
         left=True,
         right=True,
     )
-    plt.xlim(0, len(data[names[0]]) + 1)
-    xticks = [1, 2, 4, 9]
-    xlabels = [0, 0.02, 0.1, 1]
-    x = np.arange(1, len(data[names[0]]) + 1)
-    # plt.ylim(0, max_ylim)
-    # yticks = np.arange(ystep, max_ylim + ystep, ystep)
-    ytick_num = int(max_ylim / ystep)
-    y_pad = 0.5
-    plt.ylim(0, ytick_num + y_pad * 2)
-    yticks = np.arange(y_pad, y_pad + ytick_num + y_pad)
-    ylabels = np.arange(0, max_ylim + ystep, ystep)
-    plt.xlabel(names[0], fontsize=font_size)
-    plt.ylabel("Hot Nodes Ratio", fontsize=font_size)
+    max_xlim = len(data[names[0]])
+    plt.xlim(0, max_xlim - 1)
+    xticks = np.arange(0, max_xlim)
+    xlabels = data[names[0]]
+    plt.ylim(0, max_ylim)
+    yticks = np.arange(ystep, max_ylim + ystep, ystep)
+    plt.xlabel(names[0], fontsize=font_size, labelpad=10)
+    plt.ylabel("Hot Nodes Ratio", fontsize=font_size, labelpad=10)
     plt.xticks(xticks, xlabels)
     plt.tick_params(axis='x', pad=15)
-    plt.yticks(yticks, ylabels)
+    plt.yticks(yticks)
     plt.tick_params(axis='y', pad=10)
     for it, name in enumerate(names):
         if it == 0:
             continue
-        y_data = []
-        for e in data[name]:
-            y_data.append(y_pad + e / 1 * ytick_num)
         plt.plot(
-            x,
-            y_data,
+            xticks,
+            data[name],
             label=name,
             linestyle='-',
             color='k',
@@ -121,4 +113,4 @@ def draw_figure(input_path, output_path, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/threshold_hot_nodes_rate.csv", "figures", 1.0, 0.5)
+    draw_figure("data/threshold_hot_nodes_rate.csv", "figures", 1.0, 0.25)
