@@ -45,6 +45,12 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
     bar_width = 0.33
     plt.rcParams['font.size'] = font_size
 
+    sum = [0, 0]
+    for name in data:
+        for i in range(len(data[name])):
+            sum[i] += data[name][i]
+    print(sum)
+
     plt.tick_params(
         axis="both",
         which="major",
@@ -70,15 +76,14 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
             )
         plt.xlim(0, max_ylim)
         plt.xticks(np.arange(0, max_ylim, ystep))
-        print(label)
 
         plot_x = np.array([0.88, 2.12])
         plot_y = []
         plot_label = []
-        for e in data[label]:
+        for i, e in enumerate(data[label]):
             if e > 0.01:
                 plot_y.append(e)
-                plot_label.append("%.1f" % e)
+                plot_label.append("{:d}%".format(int(e / sum[i] * 100)))
         if it > 0:
             container = plt.barh(
                 plot_x,
@@ -104,6 +109,14 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
                 zorder=10,
             )
             plot_y_ = plot_y
+        if label == "Load." or label == "EmbUpdate.":
+            fontcolor = "w" if label == "Load." else "k"
+            plt.bar_label(container,
+                          plot_label,
+                          fontsize=font_size - 7,
+                          zorder=10,
+                          color=fontcolor,
+                          label_type="center")
 
     plt.legend(fontsize=font_size - 6,
                edgecolor="k",
