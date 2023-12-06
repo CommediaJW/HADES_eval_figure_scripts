@@ -32,7 +32,7 @@ def read_data(path):
 
 
 def plot(names, data, output_path, min_ylim, max_ylim, ystep):
-    plt.figure(figsize=(4.2, 3.5))
+    plt.figure(figsize=(4.2, 2.5))
     plt.clf()
     # fix parameter
     font_size = 20
@@ -74,11 +74,11 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
         #  markeredgewidth=1.5)
 
     plt.legend(
-        fontsize=font_size - 4,
+        fontsize=font_size - 7,
         edgecolor="k",
         ncol=1,
         loc="upper center",
-        bbox_to_anchor=(0.67, 0.73),
+        bbox_to_anchor=(0.75, 0.8),
     )
 
     print(f"[Note]Save to {output_path}")

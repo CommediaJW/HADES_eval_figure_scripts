@@ -6,8 +6,8 @@ import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-# hatch_list = [None, "//", "\\\\", "--"]
-hatch_list = [None, None, None, None]
+hatch_list = [None, "//", "\\\\", "xx"]
+# hatch_list = [None, None, None, None]
 color_list = ["#819fa6", "#c18076", "#3d4a55", "#d1b5ab"]
 
 
@@ -37,7 +37,7 @@ def read_data(path):
 
 
 def plot(headers, labels, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(9, 3.5))
+    plt.figure(figsize=(9, 2.5))
     plt.subplots_adjust(wspace=0.5)
     plt.clf()
     # fix parameter
@@ -68,7 +68,7 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
     for it, label in enumerate(labels):
         if it == 0:
             plt.ylabel(
-                "Normalized Speedup",
+                "Speedup",
                 fontsize=font_size,
             )
         plt.ylim(0, max_ylim)
@@ -103,11 +103,11 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
     # handles, _ = plt.gca().get_legend_handles_labels()
     # reorder_handles = [handles[0], handles[2], handles[1], handles[3]]
     # reorder_labels = [labels[0], labels[2], labels[1], labels[3]]
-    plt.legend(fontsize=font_size - 3,
+    plt.legend(fontsize=font_size - 4,
                edgecolor="k",
                ncol=4,
                loc="upper center",
-               bbox_to_anchor=(0.5, 1.22))
+               bbox_to_anchor=(0.5, 1.3))
     print(f"[Note]Save to {output_path}")
     plt.savefig(output_path, bbox_inches="tight")
     plt.close("all")

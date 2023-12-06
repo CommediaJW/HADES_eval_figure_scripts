@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-hatch_list = [None, None, None, None, None]
+hatch_list = ["\\\\", "//", "xx", "||", None]
 color_list = ["#819fa6", "#3d4a55", "#c18076", "#d1b5ab", "#E7D3C7"]
 
 
@@ -42,7 +42,7 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
     # fix parameter
     font_size = 20
     tick_space_len = 1
-    bar_width = 0.33
+    bar_width = 0.4
     plt.rcParams['font.size'] = font_size
 
     sum = [0, 0]
@@ -109,8 +109,8 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
                 zorder=10,
             )
             plot_y_ = plot_y
-        if label == "Load." or label == "EmbUpdate.":
-            fontcolor = "w" if label == "Load." else "k"
+        if label == "Embedding Loading" or label == "Embedding Updating":
+            fontcolor = "w" if label == "Embedding Loading" else "k"
             plt.bar_label(container,
                           plot_label,
                           fontsize=font_size - 7,
@@ -118,11 +118,19 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
                           color=fontcolor,
                           label_type="center")
 
-    plt.legend(fontsize=font_size - 6,
+    handles, _ = plt.gca().get_legend_handles_labels()
+    reorder_handles = [
+        handles[0], handles[3], handles[1], handles[4], handles[2]
+    ]
+    reorder_labels = [labels[0], labels[3], labels[1], labels[4], labels[2]]
+    plt.legend(reorder_handles,
+               reorder_labels,
+               fontsize=font_size - 6,
                edgecolor="k",
-               ncol=5,
-               loc="upper center",
-               bbox_to_anchor=(0.5, 1.27))
+               ncol=3,
+               loc="upper left",
+               bbox_to_anchor=(0, 0.9, 1, 0.5),
+               mode="expand")
     print(f"[Note]Save to {output_path}")
     plt.savefig(output_path, bbox_inches="tight")
     plt.close("all")

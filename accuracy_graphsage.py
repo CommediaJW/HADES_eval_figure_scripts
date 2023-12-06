@@ -37,7 +37,7 @@ def read_data(path):
 
 
 def plot(names, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(4.2, 3.5))
+    plt.figure(figsize=(4.2, 2.5))
     plt.clf()
     # fix parameter
     font_size = 20
@@ -81,7 +81,7 @@ def plot(names, data, output_path, max_ylim, ystep):
         edgecolor="k",
         ncol=1,
         loc="upper center",
-        bbox_to_anchor=(0.69, 0.39),
+        bbox_to_anchor=(0.69, 0.55),
     )
 
     print(f"[Note]Save to {output_path}")
@@ -90,7 +90,7 @@ def plot(names, data, output_path, max_ylim, ystep):
 
 
 def plot2(names, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(4.2, 3.5))
+    plt.figure(figsize=(4.2, 2.5))
     plt.clf()
     # fix parameter
     font_size = 20
@@ -134,7 +134,7 @@ def plot2(names, data, output_path, max_ylim, ystep):
         edgecolor="k",
         ncol=1,
         loc="upper center",
-        bbox_to_anchor=(0.69, 0.39),
+        bbox_to_anchor=(0.69, 0.55),
     )
 
     print(f"[Note]Save to {output_path}")
@@ -157,5 +157,5 @@ def draw_figure2(input_path, output_path, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/accuracy_graphsage_products.csv", "figures", 1, 0.2)
-    draw_figure2("data/accuracy_graphsage_reddit.csv", "figures", 1, 0.2)
+    draw_figure("data/accuracy_graphsage_products.csv", "figures", 1, 0.5)
+    draw_figure2("data/accuracy_graphsage_reddit.csv", "figures", 1, 0.5)

@@ -6,8 +6,8 @@ import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-# hatch_list = ["//", "\\\\", None, None]
-hatch_list = [None, None, None, None]
+hatch_list = ["//", "\\\\", None, None]
+# hatch_list = [None, None, None, None]
 color_list = ["#819fa6", "#c18076", "#3d4a55", "#d1b5ab"]
 
 
@@ -54,7 +54,7 @@ def read_data(path):
 
 def plot(names, object_labels, group_labels, data, lengend, output_path,
          max_ylim, ystep, model_name):
-    plt.figure(figsize=(20, 3))
+    plt.figure(figsize=(20, 2.5))
     plt.subplots_adjust(wspace=0.5)
     plt.clf()
     # fix parameter
@@ -70,7 +70,7 @@ def plot(names, object_labels, group_labels, data, lengend, output_path,
 
         plt.title(name + "-" + model_name,
                   fontsize=font_size,
-                  y=-0.5,
+                  y=-0.52,
                   fontweight="bold")
         ax.tick_params(
             axis="both",
@@ -180,5 +180,5 @@ def draw_figure2(input_path, output_path, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/speedup_graphsage_normalize.csv", "figures", 12, 2.5)
-    draw_figure2("data/speedup_gat_normalize.csv", "figures", 12, 2.5)
+    draw_figure("data/speedup_graphsage_normalize.csv", "figures", 12, 5)
+    draw_figure2("data/speedup_gat_normalize.csv", "figures", 12, 5)

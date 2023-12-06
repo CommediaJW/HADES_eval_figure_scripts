@@ -37,7 +37,7 @@ def read_data(path):
 
 
 def plot(names, data, output_path, min_ylim, max_ylim, ystep):
-    plt.figure(figsize=(4.2, 3.5))
+    plt.figure(figsize=(4.2, 2.5))
     plt.clf()
     # fix parameter
     font_size = 20
@@ -102,7 +102,7 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
 
 
 def plot2(names, data, output_path, min_ylim, max_ylim, ystep):
-    plt.figure(figsize=(4.2, 3.5))
+    plt.figure(figsize=(4.2, 2.5))
     plt.clf()
     # fix parameter
     font_size = 20
@@ -182,6 +182,6 @@ def draw_figure2(input_path, output_path, min_ylim, max_ylim, ystep):
 
 if __name__ == "__main__":
     draw_figure("data/threshold_products_throughput.csv", "figures", 30000,
-                34000, 1000)
+                34000, 2000)
     draw_figure2("data/threshold_papers_throughput.csv", "figures", 25000,
-                 45000, 5000)
+                 45000, 10000)
