@@ -1,6 +1,6 @@
 PD,PP
 Sampling,1.5761,13.332
-Embedding Loading,5.4196,23.4971
-Propagation,0.3901,1.6597
+Loading,5.4196,23.4971
+GNN Computation,0.3901,1.6597
 Model Updating,0.0324,0.0983
-Embedding Updating,7.5162,43.6739
+Embedding Gradients Aggregation & Embedding Updating,7.5162,43.6739

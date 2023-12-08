@@ -109,8 +109,8 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
                 zorder=10,
             )
             plot_y_ = plot_y
-        if label == "Embedding Loading" or label == "Embedding Updating":
-            fontcolor = "w" if label == "Embedding Loading" else "k"
+        if label == "Loading" or label == "Embedding Gradients Aggregation & Embedding Updating":
+            fontcolor = "w" if label == "Loading" else "k"
             plt.bar_label(container,
                           plot_label,
                           fontsize=font_size - 7,
@@ -120,16 +120,16 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
 
     handles, _ = plt.gca().get_legend_handles_labels()
     reorder_handles = [
-        handles[0], handles[3], handles[1], handles[4], handles[2]
+        handles[0], handles[2], handles[4], handles[1], handles[3]
     ]
-    reorder_labels = [labels[0], labels[3], labels[1], labels[4], labels[2]]
+    reorder_labels = [labels[0], labels[2], labels[4], labels[1], labels[3]]
     plt.legend(reorder_handles,
                reorder_labels,
                fontsize=font_size - 6,
                edgecolor="k",
-               ncol=3,
+               ncol=2,
                loc="upper left",
-               bbox_to_anchor=(0, 0.9, 1, 0.5),
+               bbox_to_anchor=(0, 1.08, 1, 0.5),
                mode="expand")
     print(f"[Note]Save to {output_path}")
     plt.savefig(output_path, bbox_inches="tight")
