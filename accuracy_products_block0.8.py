@@ -37,7 +37,7 @@ def read_data(path):
 
 
 def plot(names, data, output_path, max_ylim, ystep):
-    plt.figure(figsize=(4,3.5))
+    plt.figure(figsize=(3.5,3))
     plt.clf()
     # fix parameter
     font_size = 18
@@ -57,8 +57,8 @@ def plot(names, data, output_path, max_ylim, ystep):
     plt.xlim(0, max_xlim)
     x = np.arange(1, max_xlim)
     xticks = np.arange(0, max_xlim + 1, 4)
-    plt.ylim(0, max_ylim)
-    yticks = np.arange(ystep, max_ylim + ystep, ystep)
+    plt.ylim(0.15, max_ylim)
+    yticks = np.arange(0.2, 1.1, ystep)
     plt.xlabel("Epoch", fontsize=font_size, fontweight="light")
     plt.ylabel("Valid Accuracy", fontsize=font_size, fontweight="light")
     plt.xticks(xticks, fontsize=font_size, fontweight="light")
@@ -75,13 +75,6 @@ def plot(names, data, output_path, max_ylim, ystep):
                  markersize=7,
                  markeredgecolor='k',
                  markeredgewidth=0.8)
-
-    plt.legend(
-        fontsize=10,
-        edgecolor="k",
-        ncol=1,
-        loc="lower right",
-    )
     print(f"[Note]Save to {output_path}")
     plt.savefig(output_path, bbox_inches="tight")
     plt.close("all")
