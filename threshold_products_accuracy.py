@@ -37,47 +37,44 @@ def read_data(path):
 
 
 def plot(names, data, output_path, min_ylim, max_ylim, ystep):
-    plt.figure(figsize=(9, 5))
+    plt.figure(figsize=(4.2, 2.5))
     plt.clf()
     # fix parameter
     font_size = 20
     plt.rcParams['font.size'] = font_size
-    plt.title("PD-GraphSAGE", fontsize=font_size + 1, y=-0.35)
+    # plt.title("PD-GraphSAGE", fontsize=font_size + 1, y=-0.35)
     plt.tick_params(
         axis="both",
         which="major",
-        labelsize=24,
+        labelsize=font_size,
         direction="in",
         bottom=True,
         top=True,
         left=True,
         right=True,
     )
-    max_xlim = len(data[names[0]])
-    plt.xlim(0, max_xlim - 1)
-    xticks = np.arange(0, max_xlim)
-    xlabels = data[names[0]]
+    plt.xlim(0, len(data[names[0]]) + 1)
+    x = np.arange(1, 1 + len(data[names[0]]))
+    xticks = [1, 4, 9]
+    xlabels = [0, 0.1, 1]
     plt.ylim(min_ylim, max_ylim)
     yticks = np.arange(min_ylim, max_ylim, ystep)
-    plt.xlabel(names[0], fontsize=font_size, fontweight="bold", labelpad=10)
-    plt.ylabel("Accuracy", fontsize=font_size, fontweight="bold", labelpad=10)
+    plt.xlabel(names[0], fontsize=font_size)
+    plt.ylabel("Accuracy", fontsize=font_size)
     plt.xticks(xticks, xlabels)
-    plt.tick_params(axis='x', pad=15)
     plt.yticks(yticks)
-    plt.tick_params(axis='y', pad=10)
     for it, name in enumerate(names):
         if it == 0:
             continue
         plt.plot(
-            xticks,
+            x,
             data[name],
             label=name,
             linestyle='-',
-            linewidth=2,
             color='k',
             marker=marker_list[it - 1],
             markerfacecolor=color_list[it - 1],
-            markersize=20,
+            markersize=8,
             markeredgecolor='k',
             markeredgewidth=1.5,
             clip_on=False,
@@ -86,11 +83,11 @@ def plot(names, data, output_path, min_ylim, max_ylim, ystep):
 
     if len(names) > 2:
         plt.legend(
-            fontsize=font_size,
+            fontsize=font_size - 7,
             edgecolor="k",
             ncol=2,
             loc="upper center",
-            bbox_to_anchor=(0.28, 0.99),
+            # bbox_to_anchor=(0.5, 1),
         )
 
     print(f"[Note]Save to {output_path}")
@@ -106,5 +103,4 @@ def draw_figure(input_path, output_path, min_ylim, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/threshold_products_accuracy.csv", "figures", 0.7, 1,
-                0.05)
+    draw_figure("data/threshold_products_accuracy.csv", "figures", 0.7, 1, 0.1)
