@@ -29,8 +29,9 @@ def read_data(path):
             all_data[name] = [[], []]
         for row in reader:
             for i in range(int(len(row) / 2)):
-                all_data[header[i]][0].append(float(row[i * 2 + 0]))
-                all_data[header[i]][1].append(float(row[i * 2 + 1]))
+                if len(row[i * 2 + 0]) > 0:
+                    all_data[header[i]][0].append(float(row[i * 2 + 0]))
+                    all_data[header[i]][1].append(float(row[i * 2 + 1]))
 
     return header, all_data
 
@@ -134,8 +135,8 @@ if __name__ == "__main__":
     font_size = 20
     tick_space_len = 1
     draw_figure(plt.subplot(1, 2, 1), "PD-GAT",
-                "data/training_time_accuracy_pd.csv", 280, 140, 0.5, 1, 0.25,
-                True, True, 0.75, 0.95, 0.85, 120, 0.87, (0.7919, 0.7902))
+                "data/training_time_accuracy_pd.csv", 300, 150, 0.5, 1, 0.25,
+                True, True, 0.75, 0.95, 0.85, 170, 0.87, (1, 1))
     draw_figure(plt.subplot(1, 2, 2), "PP-GraphSAGE",
                 "data/training_time_accuracy_pp.csv", 450, 225, 0, 1, 0.5,
                 True, False, 0.5, 0.95, 0.85, 245, 0.7, (0.611, 0.614))

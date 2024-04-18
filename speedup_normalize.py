@@ -180,5 +180,5 @@ def draw_figure2(input_path, output_path, max_ylim, ystep):
 
 
 if __name__ == "__main__":
-    draw_figure("data/speedup_graphsage_normalize.csv", "figures", 12, 5)
-    draw_figure2("data/speedup_gat_normalize.csv", "figures", 12, 5)
+    draw_figure("data/speedup_graphsage_normalize.csv", "figures", 13.5, 5)
+    draw_figure2("data/speedup_gat_normalize.csv", "figures", 13.5, 5)
