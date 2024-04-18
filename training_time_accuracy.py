@@ -38,13 +38,13 @@ def read_data(path):
 def plot(plt, title, names, data, max_xlim, xstep, min_ylim, max_ylim, ystep,
          xtile, ytile, speeduplow, speeduphigh, speeduparrowy, speeduptextx,
          speeduptexty, converge_threshold):
-    for name in names:
+    for i, name in enumerate(names):
         thisdata = data[name]
         data[name] = [[], []]
         for it, acc in enumerate(thisdata[1]):
             data[name][0].append(thisdata[0][it])
             data[name][1].append(thisdata[1][it])
-            if acc >= converge_threshold:
+            if acc >= converge_threshold[i]:
                 break
     print(data)
 
@@ -118,22 +118,9 @@ def plot(plt, title, names, data, max_xlim, xstep, min_ylim, max_ylim, ystep,
     )
 
 
-def draw_figure(ax,
-                title,
-                input_path,
-                max_xlim,
-                xstep,
-                min_ylim,
-                max_ylim,
-                ystep,
-                xtile,
-                ytile,
-                speeduplow,
-                speeduphigh,
-                speeduparrowy,
-                speeduptextx,
-                speeduptexty,
-                converge_threshold=1):
+def draw_figure(ax, title, input_path, max_xlim, xstep, min_ylim, max_ylim,
+                ystep, xtile, ytile, speeduplow, speeduphigh, speeduparrowy,
+                speeduptextx, speeduptexty, converge_threshold):
     header, all_data = read_data(input_path)
     plot(ax, title, header, all_data, max_xlim, xstep, min_ylim, max_ylim,
          ystep, xtile, ytile, speeduplow, speeduphigh, speeduparrowy,
@@ -147,11 +134,11 @@ if __name__ == "__main__":
     font_size = 20
     tick_space_len = 1
     draw_figure(plt.subplot(1, 2, 1), "PD-GAT",
-                "data/training_time_accuracy_pd.csv", 300, 150, 0.5, 1, 0.25,
-                True, True, 0.7, 0.95, 0.85, 166, 0.87, 1)
+                "data/training_time_accuracy_pd.csv", 280, 140, 0.5, 1, 0.25,
+                True, True, 0.75, 0.95, 0.85, 120, 0.87, (0.7919, 0.7902))
     draw_figure(plt.subplot(1, 2, 2), "PP-GraphSAGE",
                 "data/training_time_accuracy_pp.csv", 450, 225, 0, 1, 0.5,
-                True, False, 0.5, 0.95, 0.85, 213, 0.7, 0.61)
+                True, False, 0.5, 0.95, 0.85, 245, 0.7, (0.611, 0.614))
 
     save_path = "figures/training_time_accuracy.pdf"
     print(f"[Note]Save to {save_path}")

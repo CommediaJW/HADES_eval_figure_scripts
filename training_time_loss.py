@@ -29,8 +29,9 @@ def read_data(path):
             all_data[name] = [[], []]
         for row in reader:
             for i in range(int(len(row) / 2)):
-                all_data[header[i]][0].append(float(row[i * 2 + 0]))
-                all_data[header[i]][1].append(float(row[i * 2 + 1]))
+                if len(row[i * 2 + 0]) > 0:
+                    all_data[header[i]][0].append(float(row[i * 2 + 0]))
+                    all_data[header[i]][1].append(float(row[i * 2 + 1]))
 
     return header, all_data
 
@@ -102,7 +103,7 @@ if __name__ == "__main__":
     font_size = 20
     tick_space_len = 1
     draw_figure(plt.subplot(1, 2, 1), "RD", "data/training_time_loss_rd.csv",
-                60, 30, 0, 50, 25, True, True)
+                6000, 3000, 0, 4, 2, True, True)
     draw_figure(plt.subplot(1, 2, 2), "PD", "data/training_time_loss_pd.csv",
                 60, 35, 0, 50, 25, True, False)
 
