@@ -7,7 +7,7 @@ matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
 color_list = ["#c18076", "#819fa6", "#3d4a55", "#d1b5ab"]
-line_list = ["-", "--", "-.", ":"]
+line_list = ["--", "-", "-.", ":"]
 
 
 def isfloat(val):
@@ -44,7 +44,12 @@ def plot(plt, title, names, data, max_xlim, xstep, min_ylim, max_ylim, ystep,
         for it, acc in enumerate(thisdata[1]):
             data[name][0].append(thisdata[0][it])
             data[name][1].append(thisdata[1][it])
-    print(data)
+
+    for key, value in data.items():
+        new_value0 = [i for step, i in enumerate(value[0]) if step % 5 == 0]
+        new_value1 = [i for step, i in enumerate(value[1]) if step % 5 == 0]
+        data[key] = [new_value0, new_value1]
+    # print(data)
     font_size = 20
     plt.set_title(title, fontsize=font_size, y=0.78, x=0.12, fontweight="bold")
     plt.tick_params(
