@@ -110,7 +110,7 @@ if __name__ == "__main__":
     draw_figure(plt.subplot(1, 2, 1), "RD", "data/training_time_loss_rd.csv",
                 6000, 3000, 0, 4, 2, True, True)
     draw_figure(plt.subplot(1, 2, 2), "PD", "data/training_time_loss_pd.csv",
-                60, 35, 0, 50, 25, True, False)
+                12000, 6000, 0, 2, 0.5, True, False)
 
     save_path = "figures/training_time_loss.pdf"
     print(f"[Note]Save to {save_path}")
