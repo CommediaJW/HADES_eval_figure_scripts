@@ -37,7 +37,8 @@ def read_data(path):
 
 
 def plot(plt, title, names, data, max_xlim, xstep, min_ylim, max_ylim, ystep,
-         xtile, ytile):
+         xtile, ytile, speeduplow, speeduphigh, speeduparrowy, speeduptextx,
+         speeduptexty):
     for name in names:
         thisdata = data[name]
         data[name] = [[], []]
@@ -85,6 +86,21 @@ def plot(plt, title, names, data, max_xlim, xstep, min_ylim, max_ylim, ystep,
                  linestyle=line_list[it],
                  color=color_list[it])
         end_list.append(data[name][0][-1])
+
+    end_list.sort()
+    for end in end_list:
+        plt.plot([end, end], [speeduplow, speeduphigh],
+                 linestyle='--',
+                 color='k')
+    plt.annotate('',
+                 xy=(end_list[1], speeduparrowy),
+                 xytext=(end_list[0], speeduparrowy),
+                 arrowprops=dict(arrowstyle='<->', color='k'))
+    plt.text(speeduptextx,
+             speeduptexty,
+             "{:.2f}x".format(end_list[1] / end_list[0]),
+             fontsize=font_size - 2)
+
     plt.legend(
         fontsize=font_size - 4,
         edgecolor="k",
@@ -95,10 +111,12 @@ def plot(plt, title, names, data, max_xlim, xstep, min_ylim, max_ylim, ystep,
 
 
 def draw_figure(ax, title, input_path, max_xlim, xstep, min_ylim, max_ylim,
-                ystep, xtile, ytile):
+                ystep, xtile, ytile, speeduplow, speeduphigh, speeduparrowy,
+                speeduptextx, speeduptexty):
     header, all_data = read_data(input_path)
     plot(ax, title, header, all_data, max_xlim, xstep, min_ylim, max_ylim,
-         ystep, xtile, ytile)
+         ystep, xtile, ytile, speeduplow, speeduphigh, speeduparrowy,
+         speeduptextx, speeduptexty)
 
 
 if __name__ == "__main__":
@@ -108,9 +126,9 @@ if __name__ == "__main__":
     font_size = 20
     tick_space_len = 1
     draw_figure(plt.subplot(1, 2, 1), "RD", "data/training_time_loss_rd.csv",
-                6000, 3000, 0, 4, 2, True, True)
+                6000, 3000, 0, 4, 2, True, True, 0.2, 1.8, 1, 3600, 1.2)
     draw_figure(plt.subplot(1, 2, 2), "PD", "data/training_time_loss_pd.csv",
-                12000, 6000, 0, 2, 0.5, True, False)
+                12000, 6000, 0, 2, 1, True, False, 0.2, 0.9, 0.55, 5700, 0.65)
 
     save_path = "figures/training_time_loss.pdf"
     print(f"[Note]Save to {save_path}")

@@ -132,7 +132,7 @@ def draw_acc(plt, data, yticks, xlabel=True):
         yticks = yticks[:-1]
     plt.set_ylim(ymin, ymax)
     plt.set_yticks(yticks)
-    # plt.set_ylabel("Epoch", fontsize=font_size, x=-1)
+    plt.set_ylabel("$\Delta$acc(%)", fontsize=font_size)
 
     cluster_num = len(xdata)
     per_cluster_bar_num = len(heads) + 1
@@ -158,31 +158,40 @@ def draw_acc(plt, data, yticks, xlabel=True):
             width=bar_width,
             edgecolor="k",
             hatch=hatch_list[it],
-            color=color_list[it],
+            color=color_list[it + 1],
             label=head,
             zorder=10,
         )
 
-    plt.plot(
-        [xmin, xmax],
-        [0, 10],
-        linestyle='-',
-        color='k',
-        clip_on=False,
-        zorder=0,
-    )
+        plt.plot(
+            [xmin, xmax],
+            [0, 0],
+            linewidth=1,
+            linestyle='-',
+            color='k',
+            clip_on=False,
+            zorder=0,
+        )
+
+        # plt.legend(
+        #     fontsize=font_size - 4,
+        #     edgecolor="k",
+        #     ncol=2,
+        #     loc="upper center",
+        #     bbox_to_anchor=(0.5, 1),
+        # )
 
 
 if __name__ == "__main__":
     plt.figure(figsize=(9, 2.5))
-    plt.subplots_adjust(wspace=0.2, hspace=0.15)
+    plt.subplots_adjust(wspace=0.4, hspace=0.15)
     plt.clf()
 
     speed_data = read_data("data/products_layers_speed.csv")
     draw_speed(plt.subplot(1, 2, 1), speed_data, (1, 4, 1.5), xlabel=True)
 
     acc_data = read_data("data/products_layers_acc.csv")
-    draw_acc(plt.subplot(1, 2, 2), acc_data, (0.0, 1.1, 0.5), xlabel=True)
+    draw_acc(plt.subplot(1, 2, 2), acc_data, (-1.0, 0.5, 0.5), xlabel=True)
 
     plt.xlabel("#GNN Layers",
                fontsize=font_size,
