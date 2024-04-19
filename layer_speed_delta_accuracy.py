@@ -32,7 +32,7 @@ def read_data(path):
 
 def draw_speed(plt, data, yticks, xlabel=True):
     xtile, xdata, heads, ydata = data
-    name = "Converge Speedup"
+    name = "Training Speedup"
 
     plt.set_title(name, fontsize=font_size, y=1.02, x=0.5, fontweight="bold")
     plt.tick_params(
@@ -96,7 +96,7 @@ def draw_speed(plt, data, yticks, xlabel=True):
 
 def draw_acc(plt, data, yticks, xlabel=True):
     xtile, xdata, heads, ydata = data
-    name = "Test Accuracy"
+    name = "$\Delta$acc(%)"
 
     plt.set_title(name, fontsize=font_size, y=1.02, x=0.5, fontweight="bold")
     plt.tick_params(
@@ -132,7 +132,7 @@ def draw_acc(plt, data, yticks, xlabel=True):
         yticks = yticks[:-1]
     plt.set_ylim(ymin, ymax)
     plt.set_yticks(yticks)
-    plt.set_ylabel("$\Delta$acc(%)", fontsize=font_size)
+    # plt.set_ylabel("$\Delta$acc(%)", fontsize=font_size)
 
     cluster_num = len(xdata)
     per_cluster_bar_num = len(heads) + 1
@@ -188,10 +188,10 @@ if __name__ == "__main__":
     plt.clf()
 
     speed_data = read_data("data/products_layers_speed.csv")
-    draw_speed(plt.subplot(1, 2, 1), speed_data, (1, 4, 1.5), xlabel=True)
+    draw_speed(plt.subplot(1, 2, 1), speed_data, (2, 4, 1), xlabel=True)
 
     acc_data = read_data("data/products_layers_acc.csv")
-    draw_acc(plt.subplot(1, 2, 2), acc_data, (-1.0, 0.5, 0.5), xlabel=True)
+    draw_acc(plt.subplot(1, 2, 2), acc_data, (-1.0, 1, 0.5), xlabel=True)
 
     plt.xlabel("#GNN Layers",
                fontsize=font_size,
