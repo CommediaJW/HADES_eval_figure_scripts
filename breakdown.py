@@ -68,7 +68,7 @@ def plot(headers, labels, data, output_path, max_ylim, ystep):
     for it, label in enumerate(labels):
         if it == 0:
             plt.ylabel(
-                "Speedup",
+                "Throughput\nSpeedup",
                 fontsize=font_size,
             )
         plt.ylim(0, max_ylim)
